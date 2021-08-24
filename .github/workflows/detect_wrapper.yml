@@ -1,16 +1,26 @@
-name: Detect_Wrapper_TEST
+name: Detect Wrapper
+
 on: [push]
+
 jobs:
-  check-bats-version:
+  build:
+
     runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        python-version: [3.6, 3.7, 3.8, 3.9]
+
     steps:
       - uses: actions/checkout@v2
-      - uses: actions/checkout@v2
-      - uses: actions/setup-python@v2
+      - name: Set up Python ${{ matrix.python-version }}
+        uses: actions/setup-python@v2
         with:
-          python-version: '3.x'
-      - uses: BSFishy/pip-action@v1
-        with:
-          packages: detect_wrapper
-          extra: -i https://test.pypi.org/simple/
-      - run: detect_wrapper --wrapper.report_html=report.html --blackduck.url=https://poc39.blackduck.synopsys.com --blackduck.api.token=MmEwZTdkNjAtNjU5MS00MWEwLThjZTgtZGI2MTFiNDA2ZDkxOjRhYzc2YTcyLTdiNjMtNGQxZC05ZTNhLTY0NDM0MjEwZjhjZg== --detect.project.name=MRB-jsc4
+          python-version: ${{ matrix.python-version }}
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip3 install -i https://test.pypi.org/simple/ --extra-index-url https://pypi.org/simple detect_wrapper
+      - name: Run Detect_Wrapper
+        run: |
+          detect_wrapper --blackduck.url=https://poc39.blackduck.synopsys.com --blackduck.api.token=MmQ4OTdlYWQtNDBkMi00ZDI3LWFkNTUtZmQyYWZmYzY0NWM3OmZkMWZkYzhkLTc5NjktNGYxZS04ODBlLWMxYTUzOWMxZjA3NA== --blackduck.trust.cert=true --detect.project.name=newdh --wrapper.junit_xml=wgpols.xml --wrapper.junit_type=pols --detect.source.path=/Users/matthewbrady/Working/duck_hub --detect.tools=DETECTOR --wrapper.report_html=test.html --detect.impact.analysis.enabled=true --detect.detector.search.depth=2 --wrapper.auto_last_scan
+      
