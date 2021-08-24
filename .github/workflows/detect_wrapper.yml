@@ -21,6 +21,7 @@ jobs:
       if: ${{ github.event_name == 'pull_request' }}
 
     - name: Synopsys Detect Wrapper
+      uses: actions/setup-python@v2
       uses: BSFishy/pip-action@v1
       with:
         packages: detect_wrapper
