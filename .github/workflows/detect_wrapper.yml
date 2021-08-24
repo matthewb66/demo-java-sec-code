@@ -1,0 +1,29 @@
+name: "Polaris Scan Action"
+
+on:
+  push:
+    branches: [master]
+  pull_request:
+    branches: [master]
+
+jobs:
+  security:
+    name: security scans
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v2
+
+    # If this run was triggered by a pull request event, then checkout
+    # the head of the pull request instead of the merge commit.
+    - run: git checkout HEAD^2
+      if: ${{ github.event_name == 'pull_request' }}
+
+    - name: Synopsys Detect Wrapper
+      uses: BSFishy/pip-action@v1
+      with:
+        packages: detect_wrapper
+        extra: '-i https://test.pypi.org/simple/ --extra-index-url https://pypi.org/simple'
+
+    - run: detect_wrapper --wrapper.report_html=report.html --blackduck.url=https://poc39.blackduck.synopsys.com --blackduck.api.token=MmEwZTdkNjAtNjU5MS00MWEwLThjZTgtZGI2MTFiNDA2ZDkxOjRhYzc2YTcyLTdiNjMtNGQxZC05ZTNhLTY0NDM0MjEwZjhjZg== --detect.project.name=MRB-jsc4
