@@ -14,17 +14,15 @@ jobs:
     steps:
     - name: Checkout repository
     - uses: actions/checkout@v2
-
-    # If this run was triggered by a pull request event, then checkout
-    # the head of the pull request instead of the merge commit.
     - run: git checkout HEAD^2
       if: ${{ github.event_name == 'pull_request' }}
 
-    - name: Synopsys Detect Wrapper
+    - name: Install Python
     - uses: actions/setup-python@v2
       with:
           python-version: '3.x' # Version range or exact version of a Python version to use, using SemVer's version range syntax
           architecture: 'x64' # optional x64 or x86. Defaults to x64 if not specified
+    - name: Synopsys Detect Wrapper 
     - uses: BSFishy/pip-action@v1
       with:
         packages: detect_wrapper
