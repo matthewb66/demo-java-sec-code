@@ -12,5 +12,5 @@ jobs:
       - uses: BSFishy/pip-action@v1
         with:
           packages: detect_wrapper
-          extra: -i https://test.pypi.org/simple/ --extra-index-url https://pypi.org/simple
+          extra: -i https://test.pypi.org/simple/
       - run: detect_wrapper --wrapper.report_html=report.html --blackduck.url=https://poc39.blackduck.synopsys.com --blackduck.api.token=MmEwZTdkNjAtNjU5MS00MWEwLThjZTgtZGI2MTFiNDA2ZDkxOjRhYzc2YTcyLTdiNjMtNGQxZC05ZTNhLTY0NDM0MjEwZjhjZg== --detect.project.name=MRB-jsc4
