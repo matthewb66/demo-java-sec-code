@@ -22,5 +22,7 @@ jobs:
           pip3 install -i https://test.pypi.org/simple/ --extra-index-url https://pypi.org/simple detect_wrapper
       - name: Run Detect_Wrapper
         run: |
-          detect_wrapper --blackduck.url=https://poc39.blackduck.synopsys.com --blackduck.api.token=MmQ4OTdlYWQtNDBkMi00ZDI3LWFkNTUtZmQyYWZmYzY0NWM3OmZkMWZkYzhkLTc5NjktNGYxZS04ODBlLWMxYTUzOWMxZjA3NA== --blackduck.trust.cert=true --detect.project.name=newdh --wrapper.junit_xml=wgpols.xml --wrapper.junit_type=pols --detect.source.path=/Users/matthewbrady/Working/duck_hub --detect.tools=DETECTOR --wrapper.report_html=test.html --detect.impact.analysis.enabled=true --detect.detector.search.depth=2 --wrapper.auto_last_scan
+          detect_wrapper --blackduck.url=https://poc39.blackduck.synopsys.com \
+          --blackduck.api.token=MmQ4OTdlYWQtNDBkMi00ZDI3LWFkNTUtZmQyYWZmYzY0NWM3OmZkMWZkYzhkLTc5NjktNGYxZS04ODBlLWMxYTUzOWMxZjA3NA== \
+          --blackduck.trust.cert=true --detect.project.name=newdh --detect.tools=DETECTOR --wrapper.report_html=test.html --detect.impact.analysis.enabled=true --detect.detector.search.depth=2 --wrapper.auto_last_scan
       
