@@ -21,8 +21,11 @@ jobs:
       if: ${{ github.event_name == 'pull_request' }}
 
     - name: Synopsys Detect Wrapper
-      uses: actions/setup-python@v2
-            BSFishy/pip-action@v1
+    - uses: actions/setup-python@v2
+      with:
+          python-version: '3.x' # Version range or exact version of a Python version to use, using SemVer's version range syntax
+          architecture: 'x64' # optional x64 or x86. Defaults to x64 if not specified
+    - uses: BSFishy/pip-action@v1
       with:
         packages: detect_wrapper
         extra: '-i https://test.pypi.org/simple/ --extra-index-url https://pypi.org/simple'
