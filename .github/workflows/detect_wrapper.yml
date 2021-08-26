@@ -25,7 +25,7 @@ jobs:
           detect_wrapper --blackduck.url=https://poc39.blackduck.synopsys.com \
           --blackduck.api.token=MmQ4OTdlYWQtNDBkMi00ZDI3LWFkNTUtZmQyYWZmYzY0NWM3OmZkMWZkYzhkLTc5NjktNGYxZS04ODBlLWMxYTUzOWMxZjA3NA== \
           --blackduck.trust.cert=true --detect.project.name=newdh --detect.tools=DETECTOR --wrapper.report_html=test.html \
-          --wrapper.auto_last_scan --wrapper.report_text --wrapper.junit_xml=out.xml
+          --wrapper.report_text --wrapper.junit_xml=out.xml
       - name: Publish Test Report
         uses: mikepenz/action-junit-report@v2
         with:
