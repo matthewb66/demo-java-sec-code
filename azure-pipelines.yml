@@ -22,8 +22,7 @@ steps:
     testResultsFiles: '**/surefire-reports/TEST-*.xml'
     goals: 'package'
 
-
-  - task: SynopsysSecurityScan@1
+- task: SynopsysSecurityScan@1
   displayName: 'Black Duck Full Scan'
   condition: not(eq(variables['Build.Reason'], 'PullRequest'))
   env:
